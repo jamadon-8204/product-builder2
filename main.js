@@ -33,6 +33,7 @@ const PRODUCTS = [
   {
     id: 1, cat: 'silver',
     emoji: '🍁', isGold: false,
+    img: 'pp-5515-1.avif', img2: 'pp-5515-2.avif',
     badge: 'NEW',
     name: '캐나다 메이플 은화 1oz 2025',
     nameEn: 'Canadian Silver Maple Leaf 1oz 2025',
@@ -45,6 +46,7 @@ const PRODUCTS = [
   {
     id: 2, cat: 'silver',
     emoji: '🍁', isGold: false,
+    img: 'pp-5515-1.avif', img2: 'pp-5515-2.avif',
     badge: 'BEST',
     name: '캐나다 메이플 은화 1oz (랜덤연도)',
     nameEn: 'Canadian Silver Maple Leaf 1oz (Random Year)',
@@ -57,6 +59,7 @@ const PRODUCTS = [
   {
     id: 3, cat: 'silver',
     emoji: '🍁', isGold: false,
+    img: 'pp-5515-1.avif', img2: 'pp-5515-2.avif',
     badge: null,
     name: '캐나다 메이플 은화 10oz 2024',
     nameEn: 'Canadian Silver Maple Leaf 10oz 2024',
@@ -211,11 +214,14 @@ function renderGrid(cat) {
       ? `<button class="card-add" onclick="event.stopPropagation();addToCart(${p.id})">장바구니 담기</button>`
       : `<button class="card-add" disabled style="opacity:.4;cursor:not-allowed">품절</button>`;
     const weightTxt = p.weightLabel ? `<div class="card-weight">${p.weightLabel}</div>` : '';
+    const imgEl = p.img
+      ? `<img class="card-coin-img" src="${p.img}" alt="${p.name}">`
+      : `<div class="coin-thumb${p.isGold?' gold':''}">${p.emoji}</div>`;
 
     return `
     <div class="product-card" data-pid="${p.id}" onclick="openProduct(${p.id})">
       <div class="card-img">
-        <div class="coin-thumb${p.isGold?' gold':''}">${p.emoji}</div>
+        ${imgEl}
         ${badge}
       </div>
       <div class="card-body">
@@ -261,11 +267,19 @@ function openProduct(id) {
   modalQty = 1;
 
   const price = calcKRW(p);
+  const imgBlock = p.img ? `
+    <div class="pm-img-wrap">
+      <img class="pm-photo" id="pm-photo" src="${p.img}" alt="${p.name}">
+      ${p.img2 ? `
+      <div class="pm-img-tabs">
+        <button class="pm-itab active" onclick="switchCoinImg('${p.img}',this)">앞면</button>
+        <button class="pm-itab" onclick="switchCoinImg('${p.img2}',this)">뒷면</button>
+      </div>` : ''}
+    </div>` : `<div class="pm-coin${p.isGold?' gold':''}">${p.emoji}</div>`;
+
   document.getElementById('product-modal-body').innerHTML = `
     <div class="pm-grid">
-      <div>
-        <div class="pm-coin${p.isGold?' gold':''}">${p.emoji}</div>
-      </div>
+      <div>${imgBlock}</div>
       <div class="pm-info">
         <div class="pm-cat">${catLabel(p.cat)}</div>
         <h2>${p.name}</h2>
@@ -319,6 +333,12 @@ function addToCartQty() {
   for (let i = 0; i < modalQty; i++) addToCart(modalProduct.id, true);
   closeProduct();
   openCart();
+}
+
+function switchCoinImg(src, btn) {
+  document.getElementById('pm-photo').src = src;
+  document.querySelectorAll('.pm-itab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
 }
 
 function closeProduct() {

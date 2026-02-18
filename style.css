@@ -412,6 +412,64 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   border-color: var(--text);
 }
 
+/* 상품 카드 실제 이미지 */
+.card-coin-img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 4px #c8c8c8,
+    0 0 0 6px #a0a0a0,
+    0 8px 24px rgba(0,0,0,0.25);
+  display: block;
+  transition: transform 0.3s ease;
+}
+.product-card:hover .card-coin-img {
+  transform: scale(1.06) rotate(3deg);
+}
+
+/* 상세 모달 실제 이미지 */
+.pm-img-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.pm-photo {
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 8px #c8c8c8,
+    0 0 0 10px #a0a0a0,
+    0 16px 40px rgba(0,0,0,0.2);
+  transition: opacity 0.2s;
+}
+.pm-img-tabs {
+  display: flex;
+  gap: 8px;
+}
+.pm-itab {
+  padding: 5px 16px;
+  border-radius: 99px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid var(--border2);
+  color: var(--text2);
+  transition: all 0.15s;
+}
+.pm-itab.active {
+  background: var(--text);
+  color: #fff;
+  border-color: var(--text);
+}
+.pm-itab:hover:not(.active) {
+  background: var(--bg3);
+}
+
 /* ── 안내 섹션 ──────────────────────────────── */
 .info-section {
   background: var(--bg2);
