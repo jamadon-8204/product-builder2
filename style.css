@@ -180,7 +180,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .btn-cta:hover { opacity: 0.85; transform: translateY(-1px); }
 .btn-cta.full { display: block; width: 100%; text-align: center; }
 
-/* 코인 3D */
+/* 히어로 코인 실사 이미지 */
 .hero-visual {
   display: flex;
   justify-content: center;
@@ -188,48 +188,40 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   position: relative;
   height: 300px;
 }
-.coin-3d {
-  width: 220px;
-  height: 220px;
+.hero-coin-wrap {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hero-coin-img {
+  width: 280px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 6px #c8c8c8,
+    0 0 0 10px #a0a0a0,
+    0 20px 60px rgba(0,0,0,0.28);
   animation: float 4s ease-in-out infinite;
 }
 @keyframes float {
-  0%,100% { transform: translateY(0) rotateY(0deg); }
-  50% { transform: translateY(-12px) rotateY(8deg); }
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-14px); }
 }
-.coin-face {
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
+.hero-coin-glow {
   position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.coin-face.front {
-  background: radial-gradient(circle at 38% 38%,
-    #f4f4f4 0%, #d8d8d8 30%, #b8b8b8 60%, #909090 100%);
-  box-shadow:
-    0 0 0 6px #c8c8c8,
-    0 0 0 8px #a8a8a8,
-    0 16px 48px rgba(0,0,0,0.3);
-  font-size: 88px;
-  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
-}
-.coin-glow {
-  position: absolute;
-  width: 200px;
+  width: 240px;
   height: 40px;
-  background: rgba(0,0,0,0.1);
+  background: rgba(0,0,0,0.15);
   border-radius: 50%;
-  bottom: 20px;
-  filter: blur(16px);
+  bottom: -24px;
+  filter: blur(18px);
   animation: float-shadow 4s ease-in-out infinite;
 }
 @keyframes float-shadow {
-  0%,100% { transform: scaleX(1); opacity: 0.3; }
-  50% { transform: scaleX(0.85); opacity: 0.15; }
+  0%,100% { transform: scaleX(1);    opacity: 0.35; }
+  50%      { transform: scaleX(0.8); opacity: 0.15; }
 }
 
 /* ── 신뢰 바 ──────────────────────────────────── */
