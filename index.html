@@ -1,14 +1,92 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+  <title>테트리스</title>
+  <link href="/style.css" rel="stylesheet" />
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+
+  <!-- 시작 화면 -->
+  <div id="screen-start" class="screen">
+    <div class="screen-box">
+      <h1>테트리스</h1>
+      <p class="sub">5단계 클리어에 도전하세요!</p>
+      <div class="stage-table">
+        <div class="stage-row header">
+          <span>단계</span><span>목표 줄</span><span>속도</span>
+        </div>
+        <div class="stage-row"><span>1단계</span><span>10줄</span><span>★☆☆☆☆</span></div>
+        <div class="stage-row"><span>2단계</span><span>+5줄</span><span>★★☆☆☆</span></div>
+        <div class="stage-row"><span>3단계</span><span>+5줄</span><span>★★★☆☆</span></div>
+        <div class="stage-row"><span>4단계</span><span>+5줄</span><span>★★★★☆</span></div>
+        <div class="stage-row"><span>5단계</span><span>+5줄</span><span>★★★★★</span></div>
+      </div>
+      <button id="btn-start" class="btn">▶ 게임 시작</button>
+      <div class="hint">
+        <kbd>← →</kbd> 이동 &nbsp;
+        <kbd>↑</kbd> 회전 &nbsp;
+        <kbd>↓</kbd> 빠른 낙하 &nbsp;
+        <kbd>Space</kbd> 즉시 낙하
+      </div>
+    </div>
+  </div>
+
+  <!-- 게임 오버 화면 -->
+  <div id="screen-over" class="screen hidden">
+    <div class="screen-box">
+      <h2 class="red">GAME OVER</h2>
+      <p id="over-score"></p>
+      <p id="over-stage"></p>
+      <button id="btn-retry" class="btn">↺ 다시 시작</button>
+    </div>
+  </div>
+
+  <!-- 게임 클리어 화면 -->
+  <div id="screen-clear" class="screen hidden">
+    <div class="screen-box">
+      <h2 class="gold">🎉 게임 클리어!</h2>
+      <p class="sub">5단계를 모두 클리어했습니다!</p>
+      <p id="clear-score"></p>
+      <button id="btn-clear-retry" class="btn">↺ 다시 시작</button>
+    </div>
+  </div>
+
+  <!-- 게임 영역 -->
+  <div id="wrap">
+    <div class="side left">
+      <div class="info-box">
+        <div class="info-label">점수</div>
+        <div class="info-val" id="ui-score">0</div>
+      </div>
+      <div class="info-box">
+        <div class="info-label">단계</div>
+        <div class="info-val stage-val" id="ui-stage">1</div>
+      </div>
+      <div class="info-box">
+        <div class="info-label">이번 단계 줄</div>
+        <div class="info-val" id="ui-lines">0 / 10</div>
+        <div class="prog-bar">
+          <div class="prog-fill" id="ui-prog"></div>
+        </div>
+      </div>
+      <div class="info-box">
+        <div class="info-label">총 클리어 줄</div>
+        <div class="info-val" id="ui-total">0</div>
+      </div>
+    </div>
+
+    <canvas id="canvas"></canvas>
+
+    <div class="side right">
+      <div class="info-box">
+        <div class="info-label">다음 블록</div>
+        <canvas id="next-canvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script defer src="/main.js"></script>
 </body>
 </html>

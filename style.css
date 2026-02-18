@@ -1,1 +1,223 @@
-/* Add styles here */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg:      #0d1117;
+  --bg2:     #161b22;
+  --bg3:     #1c2128;
+  --border:  #30363d;
+  --accent:  #e94560;
+  --gold:    #ffd700;
+  --text:    #e6edf3;
+  --muted:   #8b949e;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* ── 오버레이 화면 ─────────────────────── */
+.screen {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  backdrop-filter: blur(4px);
+}
+
+.screen.hidden { display: none; }
+
+.screen-box {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 40px 48px;
+  text-align: center;
+  min-width: 320px;
+  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.6);
+}
+
+.screen-box h1 {
+  font-size: 3em;
+  letter-spacing: 10px;
+  color: var(--accent);
+  text-shadow: 0 0 32px var(--accent);
+  margin-bottom: 8px;
+}
+
+.screen-box h2 {
+  font-size: 2em;
+  margin-bottom: 16px;
+}
+
+.screen-box h2.red  { color: var(--accent); text-shadow: 0 0 20px var(--accent); }
+.screen-box h2.gold { color: var(--gold);   text-shadow: 0 0 24px var(--gold); }
+
+.screen-box p {
+  color: var(--text);
+  margin: 8px 0;
+  font-size: 1.1em;
+}
+
+.sub {
+  color: var(--muted);
+  margin-bottom: 18px;
+  font-size: 0.92em;
+}
+
+/* 단계 표 */
+.stage-table {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 16px;
+  margin: 14px 0 22px;
+  font-size: 0.86em;
+}
+
+.stage-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  color: var(--text);
+}
+
+.stage-row.header {
+  color: var(--muted);
+  font-size: 0.78em;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+  margin-bottom: 4px;
+}
+
+.stage-row span {
+  width: 90px;
+  text-align: center;
+}
+.stage-row span:first-child { text-align: left; }
+
+/* 버튼 */
+.btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 13px 38px;
+  font-size: 1em;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  margin-top: 6px;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+  box-shadow: 0 4px 16px rgba(233, 69, 96, 0.35);
+}
+.btn:hover  { background: #c73652; transform: scale(1.04); }
+.btn:active { transform: scale(0.97); }
+
+/* 단축키 힌트 */
+.hint {
+  margin-top: 20px;
+  font-size: 0.78em;
+  color: var(--muted);
+  line-height: 2.2;
+}
+
+kbd {
+  display: inline-block;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-family: monospace;
+  font-size: 0.93em;
+  color: var(--text);
+}
+
+/* ── 게임 레이아웃 ─────────────────────── */
+#wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+#canvas {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  box-shadow: 0 0 40px rgba(233, 69, 96, 0.18);
+}
+
+/* 사이드 패널 */
+.side {
+  width: 116px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info-box {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 11px 12px;
+  text-align: center;
+}
+
+.info-label {
+  font-size: 0.65em;
+  color: var(--muted);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.info-val {
+  font-size: 1.45em;
+  font-weight: 700;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.stage-val {
+  font-size: 2em;
+}
+
+/* 진행 바 */
+.prog-bar {
+  height: 5px;
+  background: var(--bg3);
+  border-radius: 3px;
+  margin-top: 9px;
+  overflow: hidden;
+}
+
+.prog-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 3px;
+  width: 0%;
+  transition: width 0.25s ease;
+}
+
+/* 다음 블록 캔버스 */
+#next-canvas {
+  display: block;
+  margin: 8px auto 0;
+}
