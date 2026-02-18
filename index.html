@@ -1,92 +1,248 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>테트리스</title>
-  <link href="/style.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SILVERMINT | 귀금속 직구 전문몰</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- 시작 화면 -->
-  <div id="screen-start" class="screen">
-    <div class="screen-box">
-      <h1>테트리스</h1>
-      <p class="sub">5단계 클리어에 도전하세요!</p>
-      <div class="stage-table">
-        <div class="stage-row header">
-          <span>단계</span><span>목표 줄</span><span>속도</span>
-        </div>
-        <div class="stage-row"><span>1단계</span><span>10줄</span><span>★☆☆☆☆</span></div>
-        <div class="stage-row"><span>2단계</span><span>+5줄</span><span>★★☆☆☆</span></div>
-        <div class="stage-row"><span>3단계</span><span>+5줄</span><span>★★★☆☆</span></div>
-        <div class="stage-row"><span>4단계</span><span>+5줄</span><span>★★★★☆</span></div>
-        <div class="stage-row"><span>5단계</span><span>+5줄</span><span>★★★★★</span></div>
+  <!-- ── 시세 티커 ── -->
+  <div class="ticker-bar">
+    <div class="ticker-inner">
+      <span class="t-item">
+        <span class="t-label">은(Ag)</span>
+        <span class="t-val" id="p-ag">--</span>
+        <span class="t-unit">USD/oz</span>
+        <span class="t-krw" id="p-ag-krw">(--원)</span>
+      </span>
+      <span class="t-sep">·</span>
+      <span class="t-item">
+        <span class="t-label">금(Au)</span>
+        <span class="t-val" id="p-au">--</span>
+        <span class="t-unit">USD/oz</span>
+      </span>
+      <span class="t-sep">·</span>
+      <span class="t-item">
+        <span class="t-label">USD/KRW</span>
+        <span class="t-val" id="p-rate">--</span>
+      </span>
+      <span class="t-sep">·</span>
+      <span class="t-update" id="p-time">시세 로딩 중...</span>
+    </div>
+  </div>
+
+  <!-- ── 헤더 ── -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="#" class="logo" onclick="filterCat('all');return false;">
+        <span class="logo-icon">◈</span> SILVERMINT
+      </a>
+      <nav class="nav" id="nav">
+        <a class="nav-a active" href="#shop" data-cat="all" onclick="navClick(this,'all')">전체</a>
+        <a class="nav-a" href="#shop" data-cat="silver" onclick="navClick(this,'silver')">은화</a>
+        <a class="nav-a" href="#shop" data-cat="gold" onclick="navClick(this,'gold')">금화</a>
+        <a class="nav-a" href="#shop" data-cat="supply" onclick="navClick(this,'supply')">용품</a>
+        <a class="nav-a" href="#shop" data-cat="presale" onclick="navClick(this,'presale')">예약구매</a>
+      </nav>
+      <div class="hd-actions">
+        <button class="hd-btn" id="btn-login" onclick="openLogin()">로그인</button>
+        <button class="hd-btn cart-btn" id="btn-cart" onclick="openCart()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span id="cart-count" class="cart-count hidden">0</span>
+        </button>
       </div>
-      <button id="btn-start" class="btn">▶ 게임 시작</button>
-      <div class="hint">
-        <kbd>← →</kbd> 이동 &nbsp;
-        <kbd>↑</kbd> 회전 &nbsp;
-        <kbd>↓</kbd> 빠른 낙하 &nbsp;
-        <kbd>Space</kbd> 즉시 낙하
+    </div>
+  </header>
+
+  <!-- ── 히어로 ── -->
+  <section class="hero" id="hero">
+    <div class="hero-text">
+      <p class="hero-eyebrow">캐나다 왕립조폐국 인증 딜러</p>
+      <h1>순도 99.99%<br>귀금속 직구</h1>
+      <p class="hero-desc">해외에서 직접 소싱한 정품 귀금속을<br>프리미엄 없이 합리적인 가격으로.</p>
+      <a href="#shop" class="btn-cta">지금 쇼핑하기</a>
+    </div>
+    <div class="hero-visual">
+      <div class="coin-3d">
+        <div class="coin-face front"><span>🍁</span></div>
+        <div class="coin-face back"></div>
+      </div>
+      <div class="coin-glow"></div>
+    </div>
+  </section>
+
+  <!-- ── 신뢰 배지 ── -->
+  <div class="trust-bar">
+    <div class="trust-item"><span class="trust-icon">✓</span><span>순도 99.99% 보증서 동봉</span></div>
+    <div class="trust-item"><span class="trust-icon">✓</span><span>100% 정품 보증</span></div>
+    <div class="trust-item"><span class="trust-icon">✓</span><span>5만원 이상 무료배송</span></div>
+    <div class="trust-item"><span class="trust-icon">✓</span><span>안전 등기 포장</span></div>
+  </div>
+
+  <!-- ── 상품 섹션 ── -->
+  <section class="shop-section" id="shop">
+    <div class="shop-head">
+      <h2 id="shop-title">전체 상품</h2>
+      <div class="filter-row">
+        <button class="filter-btn active" onclick="filterCat('all',this)">전체</button>
+        <button class="filter-btn" onclick="filterCat('silver',this)">은화</button>
+        <button class="filter-btn" onclick="filterCat('gold',this)">금화</button>
+        <button class="filter-btn" onclick="filterCat('supply',this)">용품</button>
+        <button class="filter-btn" onclick="filterCat('presale',this)">예약구매</button>
+      </div>
+    </div>
+    <div class="product-grid" id="product-grid"></div>
+  </section>
+
+  <!-- ── 배송·결제 안내 ── -->
+  <section class="info-section">
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-icon">📦</div>
+        <h4>배송 안내</h4>
+        <p>주문 확인 후 D+2 이내 발송<br>등기 배송으로 안전하게<br>5만원 이상 무료배송</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">🔒</div>
+        <h4>정품 보증</h4>
+        <p>캐나다·미국·오스트리아 등<br>공인 조폐국 직접 구매<br>보증서 및 원본 패키지 동봉</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">💳</div>
+        <h4>결제 수단</h4>
+        <p>신용카드 · 계좌이체<br>카카오페이 · 네이버페이<br>무이자 할부 가능</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">↩</div>
+        <h4>교환·반품</h4>
+        <p>수령 후 7일 이내<br>미개봉·미사용 상품에 한해<br>고객센터 접수 후 처리</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 장바구니 패널 ── -->
+  <div class="dimmer" id="cart-dimmer" onclick="closeCart()"></div>
+  <aside class="cart-panel" id="cart-panel">
+    <div class="cp-head">
+      <h3>장바구니</h3>
+      <button class="cp-close" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cp-body" id="cp-body">
+      <div class="cart-empty" id="cart-empty">
+        <p>장바구니가 비어있습니다.</p>
+      </div>
+      <div id="cart-item-list"></div>
+    </div>
+    <div class="cp-foot" id="cp-foot">
+      <div class="cp-total-row">
+        <span>상품 합계</span>
+        <strong id="cp-subtotal">0원</strong>
+      </div>
+      <div class="cp-total-row">
+        <span>배송비</span>
+        <strong id="cp-ship">3,000원</strong>
+      </div>
+      <div class="cp-total-row total">
+        <span>결제 금액</span>
+        <strong id="cp-total">0원</strong>
+      </div>
+      <button class="btn-order" onclick="goOrder()">주문하기</button>
+      <p class="cp-note">5만원 이상 무료배송</p>
+    </div>
+  </aside>
+
+  <!-- ── 상품 상세 모달 ── -->
+  <div class="modal-dim" id="pdim" onclick="closeProduct()"></div>
+  <div class="modal product-modal" id="product-modal">
+    <button class="modal-close" onclick="closeProduct()">✕</button>
+    <div id="product-modal-body"></div>
+  </div>
+
+  <!-- ── 로그인 모달 ── -->
+  <div class="modal-dim" id="ldim" onclick="closeLogin()"></div>
+  <div class="modal login-modal" id="login-modal">
+    <button class="modal-close" onclick="closeLogin()">✕</button>
+    <div class="login-tabs">
+      <button class="ltab active" id="ltab-login" onclick="switchLoginTab('login')">로그인</button>
+      <button class="ltab" id="ltab-signup" onclick="switchLoginTab('signup')">회원가입</button>
+    </div>
+    <div id="login-form">
+      <div class="form-group">
+        <input type="email" class="form-input" placeholder="이메일">
+        <input type="password" class="form-input" placeholder="비밀번호">
+        <button class="btn-cta full" onclick="alert('준비 중입니다.')">로그인</button>
+      </div>
+      <div class="social-btns">
+        <button class="btn-kakao" onclick="alert('준비 중입니다.')">카카오 로그인</button>
+        <button class="btn-naver" onclick="alert('준비 중입니다.')">네이버 로그인</button>
+      </div>
+    </div>
+    <div id="signup-form" style="display:none">
+      <div class="form-group">
+        <input type="text" class="form-input" placeholder="이름">
+        <input type="email" class="form-input" placeholder="이메일">
+        <input type="password" class="form-input" placeholder="비밀번호 (8자 이상)">
+        <input type="tel" class="form-input" placeholder="휴대폰 번호">
+        <label class="checkbox-label">
+          <input type="checkbox"> 이용약관 및 개인정보처리방침에 동의합니다.
+        </label>
+        <button class="btn-cta full" onclick="alert('준비 중입니다.')">회원가입</button>
       </div>
     </div>
   </div>
 
-  <!-- 게임 오버 화면 -->
-  <div id="screen-over" class="screen hidden">
-    <div class="screen-box">
-      <h2 class="red">GAME OVER</h2>
-      <p id="over-score"></p>
-      <p id="over-stage"></p>
-      <button id="btn-retry" class="btn">↺ 다시 시작</button>
+  <!-- ── 주문 모달 ── -->
+  <div class="modal-dim" id="odim" onclick="closeOrder()"></div>
+  <div class="modal order-modal" id="order-modal">
+    <button class="modal-close" onclick="closeOrder()">✕</button>
+    <h3 style="margin-bottom:20px">주문 / 결제</h3>
+    <div class="form-group">
+      <label class="form-label">받는 분</label>
+      <input type="text" class="form-input" placeholder="이름">
+      <label class="form-label">연락처</label>
+      <input type="tel" class="form-input" placeholder="010-0000-0000">
+      <label class="form-label">배송 주소</label>
+      <input type="text" class="form-input" placeholder="우편번호">
+      <input type="text" class="form-input" placeholder="기본 주소">
+      <input type="text" class="form-input" placeholder="상세 주소">
+      <label class="form-label">결제 수단</label>
+      <select class="form-input">
+        <option>신용카드</option>
+        <option>실시간 계좌이체</option>
+        <option>카카오페이</option>
+        <option>네이버페이</option>
+      </select>
     </div>
+    <div class="order-summary" id="order-summary"></div>
+    <button class="btn-order" onclick="alert('결제 연동 준비 중입니다.')">결제하기</button>
   </div>
 
-  <!-- 게임 클리어 화면 -->
-  <div id="screen-clear" class="screen hidden">
-    <div class="screen-box">
-      <h2 class="gold">🎉 게임 클리어!</h2>
-      <p class="sub">5단계를 모두 클리어했습니다!</p>
-      <p id="clear-score"></p>
-      <button id="btn-clear-retry" class="btn">↺ 다시 시작</button>
-    </div>
-  </div>
-
-  <!-- 게임 영역 -->
-  <div id="wrap">
-    <div class="side left">
-      <div class="info-box">
-        <div class="info-label">점수</div>
-        <div class="info-val" id="ui-score">0</div>
+  <!-- ── 푸터 ── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">◈ SILVERMINT</div>
+        <p>해외 직구 귀금속 전문몰</p>
       </div>
-      <div class="info-box">
-        <div class="info-label">단계</div>
-        <div class="info-val stage-val" id="ui-stage">1</div>
+      <div class="footer-info">
+        <p><strong>상호</strong> 실버민트 &nbsp;|&nbsp; <strong>대표</strong> 홍길동</p>
+        <p><strong>사업자등록번호</strong> 000-00-00000 &nbsp;|&nbsp; <strong>통신판매업</strong> 제2025-서울강남-00000호</p>
+        <p><strong>주소</strong> 서울특별시 강남구 테헤란로 000</p>
+        <p><strong>고객센터</strong> 010-0000-0000 &nbsp;|&nbsp; <strong>이메일</strong> help@silvermint.kr</p>
+        <p class="footer-notice">※ 귀금속 가격은 국제 시세 및 환율에 따라 실시간 변동됩니다.</p>
       </div>
-      <div class="info-box">
-        <div class="info-label">이번 단계 줄</div>
-        <div class="info-val" id="ui-lines">0 / 10</div>
-        <div class="prog-bar">
-          <div class="prog-fill" id="ui-prog"></div>
-        </div>
-      </div>
-      <div class="info-box">
-        <div class="info-label">총 클리어 줄</div>
-        <div class="info-val" id="ui-total">0</div>
+      <div class="footer-links">
+        <a href="#">이용약관</a>
+        <a href="#">개인정보처리방침</a>
+        <a href="#">배송·교환·반품 안내</a>
+        <a href="#">공지사항</a>
       </div>
     </div>
+    <div class="footer-copy">© 2025 SILVERMINT. All rights reserved.</div>
+  </footer>
 
-    <canvas id="canvas"></canvas>
-
-    <div class="side right">
-      <div class="info-box">
-        <div class="info-label">다음 블록</div>
-        <canvas id="next-canvas"></canvas>
-      </div>
-    </div>
-  </div>
-
-  <script defer src="/main.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
