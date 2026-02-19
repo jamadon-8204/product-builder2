@@ -3,245 +3,313 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SHURONGMINT | 귀금속 직구 전문몰</title>
-  <link rel="stylesheet" href="style.css">
+  <title>골목길 팔란티어 | Alley Palantir</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="palantir.css">
 </head>
 <body>
 
-  <!-- ── 시세 티커 ── -->
-  <div class="ticker-bar">
-    <div class="ticker-inner">
-      <span class="t-item">
-        <span class="t-label">은(Ag)</span>
-        <span class="t-val" id="p-ag">--</span>
-        <span class="t-unit">USD/oz</span>
-        <span class="t-krw" id="p-ag-krw">(--원)</span>
-      </span>
-      <span class="t-sep">·</span>
-      <span class="t-item">
-        <span class="t-label">금(Au)</span>
-        <span class="t-val" id="p-au">--</span>
-        <span class="t-unit">USD/oz</span>
-      </span>
-      <span class="t-sep">·</span>
-      <span class="t-item">
-        <span class="t-label">USD/KRW</span>
-        <span class="t-val" id="p-rate">--</span>
-      </span>
-      <span class="t-sep">·</span>
-      <span class="t-update" id="p-time">시세 로딩 중...</span>
-    </div>
-  </div>
-
-  <!-- ── 헤더 ── -->
-  <header class="header" id="header">
-    <div class="header-inner">
-      <a href="#" class="logo" onclick="filterCat('all');return false;">
-        <span class="logo-icon">◈</span> SHURONGMINT
+  <!-- ── NAV ── -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <span class="logo-icon">◈</span>
+        <span class="logo-text" data-ko="골목길 팔란티어" data-en="Alley Palantir">골목길 팔란티어</span>
       </a>
-      <nav class="nav" id="nav">
-        <a class="nav-a active" href="#shop" data-cat="all" onclick="navClick(this,'all')">전체</a>
-        <a class="nav-a" href="#shop" data-cat="silver" onclick="navClick(this,'silver')">은화</a>
-        <a class="nav-a" href="#shop" data-cat="gold" onclick="navClick(this,'gold')">금화</a>
-        <a class="nav-a" href="#shop" data-cat="supply" onclick="navClick(this,'supply')">용품</a>
-        <a class="nav-a" href="#shop" data-cat="presale" onclick="navClick(this,'presale')">예약구매</a>
-      </nav>
-      <div class="hd-actions">
-        <button class="hd-btn" id="btn-login" onclick="openLogin()">로그인</button>
-        <button class="hd-btn cart-btn" id="btn-cart" onclick="openCart()">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-          <span id="cart-count" class="cart-count hidden">0</span>
+      <div class="nav-links">
+        <a href="#services" class="nav-link" data-ko="서비스" data-en="Services">서비스</a>
+        <a href="#industries" class="nav-link" data-ko="업종" data-en="Industries">업종</a>
+        <a href="#how" class="nav-link" data-ko="도입 방법" data-en="How It Works">도입 방법</a>
+        <a href="#contact" class="nav-link nav-cta" data-ko="무료 상담" data-en="Free Consult">무료 상담</a>
+        <button class="lang-toggle" id="langToggle" aria-label="언어 전환">
+          <span class="lang-option" id="langKo">한국어</span>
+          <span class="lang-sep">/</span>
+          <span class="lang-option" id="langEn">EN</span>
         </button>
       </div>
     </div>
-  </header>
+  </nav>
 
-  <!-- ── 히어로 ── -->
+  <!-- ── HERO ── -->
   <section class="hero" id="hero">
-    <div class="hero-text">
-      <p class="hero-eyebrow">캐나다 왕립조폐국 인증 딜러</p>
-      <h1>순도 99.99%<br>귀금속 직구</h1>
-      <p class="hero-desc">해외에서 직접 소싱한 정품 귀금속을<br>프리미엄 없이 합리적인 가격으로.</p>
-      <a href="#shop" class="btn-cta">지금 쇼핑하기</a>
+    <div class="hero-grid-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span data-ko="AI 기반 소상공인 운영 자동화" data-en="AI-Powered Solo Business Platform">AI 기반 소상공인 운영 자동화</span>
+      </div>
+      <h1 class="hero-title">
+        <span class="line" data-ko="혼자서도" data-en="One person.">혼자서도</span>
+        <span class="line accent" data-ko="충분합니다." data-en="Fully capable.">충분합니다.</span>
+      </h1>
+      <p class="hero-sub" data-ko="미용실, 학원, 의원. 1인 경영의 모든 고단함을 AI가 대신합니다. 고객 응대부터 예약, 매출 분석까지 — 팔란티어가 곁에 있습니다." data-en="Hair salons, academies, clinics. AI handles what solo owners can't do alone. From customer service to scheduling and revenue insights — Palantir is with you.">미용실, 학원, 의원. 1인 경영의 모든 고단함을 AI가 대신합니다. 고객 응대부터 예약, 매출 분석까지 — 팔란티어가 곁에 있습니다.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary" data-ko="무료로 시작하기" data-en="Get Started Free">무료로 시작하기</a>
+        <a href="#services" class="btn btn-ghost" data-ko="서비스 알아보기" data-en="See How It Works">서비스 알아보기</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">24<span class="stat-unit">h</span></span>
+          <span class="stat-label" data-ko="무중단 CS 자동화" data-en="Nonstop CS Automation">무중단 CS 자동화</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">3<span class="stat-unit">min</span></span>
+          <span class="stat-label" data-ko="평균 도입 시간" data-en="Avg. Setup Time">평균 도입 시간</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">0<span class="stat-unit">명</span></span>
+          <span class="stat-label" data-ko="추가 직원 필요 없음" data-en="Zero Extra Staff">추가 직원 필요 없음</span>
+        </div>
+      </div>
     </div>
     <div class="hero-visual">
-      <div class="hero-coin-wrap">
-        <img class="hero-coin-img" src="pp-5515-2.avif" alt="캐나다 메이플 은화">
-        <div class="hero-coin-glow"></div>
+      <div class="terminal">
+        <div class="terminal-bar">
+          <span class="t-dot red"></span>
+          <span class="t-dot yellow"></span>
+          <span class="t-dot green"></span>
+          <span class="t-title">palantir.ai — ops console</span>
+        </div>
+        <div class="terminal-body" id="terminalBody">
+          <div class="t-line"><span class="t-prompt">▸</span> <span class="t-cmd">system.boot()</span></div>
+          <div class="t-line"><span class="t-out success">✓ CS Bot 온라인</span></div>
+          <div class="t-line"><span class="t-out success">✓ 예약 시스템 연결됨</span></div>
+          <div class="t-line"><span class="t-out success">✓ 매출 분석 활성화</span></div>
+          <div class="t-line"><span class="t-out info">━━ 오늘 신규 문의 12건 처리 완료</span></div>
+          <div class="t-line"><span class="t-out info">━━ 예약 충돌 0건</span></div>
+          <div class="t-line"><span class="t-out highlight">▸ 사장님, 오늘도 잘 부탁드립니다.</span></div>
+          <div class="t-cursor">_</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ── 신뢰 배지 ── -->
-  <div class="trust-bar">
-    <div class="trust-item"><span class="trust-icon">✓</span><span>순도 99.99% 보증서 동봉</span></div>
-    <div class="trust-item"><span class="trust-icon">✓</span><span>100% 정품 보증</span></div>
-    <div class="trust-item"><span class="trust-icon">✓</span><span>5만원 이상 무료배송</span></div>
-    <div class="trust-item"><span class="trust-icon">✓</span><span>안전 등기 포장</span></div>
-  </div>
-
-  <!-- ── 상품 섹션 ── -->
-  <section class="shop-section" id="shop">
-    <div class="shop-head">
-      <h2 id="shop-title">전체 상품</h2>
-      <div class="filter-row">
-        <button class="filter-btn active" onclick="filterCat('all',this)">전체</button>
-        <button class="filter-btn" onclick="filterCat('silver',this)">은화</button>
-        <button class="filter-btn" onclick="filterCat('gold',this)">금화</button>
-        <button class="filter-btn" onclick="filterCat('supply',this)">용품</button>
-        <button class="filter-btn" onclick="filterCat('presale',this)">예약구매</button>
-      </div>
-    </div>
-    <div class="product-grid" id="product-grid"></div>
-  </section>
-
-  <!-- ── 배송·결제 안내 ── -->
-  <section class="info-section">
-    <div class="info-grid">
-      <div class="info-card">
-        <div class="info-icon">📦</div>
-        <h4>배송 안내</h4>
-        <p>주문 확인 후 D+2 이내 발송<br>등기 배송으로 안전하게<br>5만원 이상 무료배송</p>
-      </div>
-      <div class="info-card">
-        <div class="info-icon">🔒</div>
-        <h4>정품 보증</h4>
-        <p>캐나다·미국·오스트리아 등<br>공인 조폐국 직접 구매<br>보증서 및 원본 패키지 동봉</p>
-      </div>
-      <div class="info-card">
-        <div class="info-icon">💳</div>
-        <h4>결제 수단</h4>
-        <p>신용카드 · 계좌이체<br>카카오페이 · 네이버페이<br>무이자 할부 가능</p>
-      </div>
-      <div class="info-card">
-        <div class="info-icon">↩</div>
-        <h4>교환·반품</h4>
-        <p>수령 후 7일 이내<br>미개봉·미사용 상품에 한해<br>고객센터 접수 후 처리</p>
+  <!-- ── PROBLEM ── -->
+  <section class="problem">
+    <div class="container">
+      <div class="section-label" data-ko="문제 정의" data-en="The Problem">문제 정의</div>
+      <h2 class="section-title" data-ko="1인 경영, 현실은 다릅니다." data-en="Solo business. The reality is harsh.">1인 경영, 현실은 다릅니다.</h2>
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="problem-icon">📞</div>
+          <h3 data-ko="쉬는 시간도 전화" data-en="Calls Never Stop">쉬는 시간도 전화</h3>
+          <p data-ko="점심도 못 먹고, 시술 중에도 전화를 받아야 합니다." data-en="Can't eat lunch. Can't focus. Calls keep coming.">점심도 못 먹고, 시술 중에도 전화를 받아야 합니다.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">📅</div>
+          <h3 data-ko="예약 관리의 혼란" data-en="Scheduling Chaos">예약 관리의 혼란</h3>
+          <p data-ko="카카오톡, 전화, 현장 예약이 뒤섞여 실수가 잦습니다." data-en="KakaoTalk, calls, walk-ins — all mixed up, mistakes happen.">카카오톡, 전화, 현장 예약이 뒤섞여 실수가 잦습니다.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">📊</div>
+          <h3 data-ko="경영 데이터가 없음" data-en="No Business Insights">경영 데이터가 없음</h3>
+          <p data-ko="어떤 서비스가 잘 팔리는지, 단골은 누군지 파악이 어렵습니다." data-en="No idea which service sells best, or who your loyal customers are.">어떤 서비스가 잘 팔리는지, 단골은 누군지 파악이 어렵습니다.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">💬</div>
+          <h3 data-ko="리뷰·SNS 관리 부담" data-en="Review & SNS Overload">리뷰·SNS 관리 부담</h3>
+          <p data-ko="답변은 해야 하는데 시간이 없습니다. 마케팅은 꿈도 못 꿉니다." data-en="Need to reply, but no time. Marketing? Forget it.">답변은 해야 하는데 시간이 없습니다. 마케팅은 꿈도 못 꿉니다.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ── 장바구니 패널 ── -->
-  <div class="dimmer" id="cart-dimmer" onclick="closeCart()"></div>
-  <aside class="cart-panel" id="cart-panel">
-    <div class="cp-head">
-      <h3>장바구니</h3>
-      <button class="cp-close" onclick="closeCart()">✕</button>
-    </div>
-    <div class="cp-body" id="cp-body">
-      <div class="cart-empty" id="cart-empty">
-        <p>장바구니가 비어있습니다.</p>
-      </div>
-      <div id="cart-item-list"></div>
-    </div>
-    <div class="cp-foot" id="cp-foot">
-      <div class="cp-total-row">
-        <span>상품 합계</span>
-        <strong id="cp-subtotal">0원</strong>
-      </div>
-      <div class="cp-total-row">
-        <span>배송비</span>
-        <strong id="cp-ship">3,000원</strong>
-      </div>
-      <div class="cp-total-row total">
-        <span>결제 금액</span>
-        <strong id="cp-total">0원</strong>
-      </div>
-      <button class="btn-order" onclick="goOrder()">주문하기</button>
-      <p class="cp-note">5만원 이상 무료배송</p>
-    </div>
-  </aside>
+  <!-- ── SERVICES ── -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-label" data-ko="핵심 서비스" data-en="Core Services">핵심 서비스</div>
+      <h2 class="section-title" data-ko="팔란티어가 대신합니다." data-en="Palantir handles it.">팔란티어가 대신합니다.</h2>
+      <p class="section-desc" data-ko="복잡한 설치나 IT 지식 없이, 바로 사용할 수 있습니다." data-en="No complex setup. No IT knowledge needed. Start immediately.">복잡한 설치나 IT 지식 없이, 바로 사용할 수 있습니다.</p>
 
-  <!-- ── 상품 상세 모달 ── -->
-  <div class="modal-dim" id="pdim" onclick="closeProduct()"></div>
-  <div class="modal product-modal" id="product-modal">
-    <button class="modal-close" onclick="closeProduct()">✕</button>
-    <div id="product-modal-body"></div>
-  </div>
+      <div class="services-grid">
 
-  <!-- ── 로그인 모달 ── -->
-  <div class="modal-dim" id="ldim" onclick="closeLogin()"></div>
-  <div class="modal login-modal" id="login-modal">
-    <button class="modal-close" onclick="closeLogin()">✕</button>
-    <div class="login-tabs">
-      <button class="ltab active" id="ltab-login" onclick="switchLoginTab('login')">로그인</button>
-      <button class="ltab" id="ltab-signup" onclick="switchLoginTab('signup')">회원가입</button>
-    </div>
-    <div id="login-form">
-      <div class="form-group">
-        <input type="email" class="form-input" placeholder="이메일">
-        <input type="password" class="form-input" placeholder="비밀번호">
-        <button class="btn-cta full" onclick="alert('준비 중입니다.')">로그인</button>
-      </div>
-      <div class="social-btns">
-        <button class="btn-kakao" onclick="alert('준비 중입니다.')">카카오 로그인</button>
-        <button class="btn-naver" onclick="alert('준비 중입니다.')">네이버 로그인</button>
-      </div>
-    </div>
-    <div id="signup-form" style="display:none">
-      <div class="form-group">
-        <input type="text" class="form-input" placeholder="이름">
-        <input type="email" class="form-input" placeholder="이메일">
-        <input type="password" class="form-input" placeholder="비밀번호 (8자 이상)">
-        <input type="tel" class="form-input" placeholder="휴대폰 번호">
-        <label class="checkbox-label">
-          <input type="checkbox"> 이용약관 및 개인정보처리방침에 동의합니다.
-        </label>
-        <button class="btn-cta full" onclick="alert('준비 중입니다.')">회원가입</button>
-      </div>
-    </div>
-  </div>
+        <div class="service-card featured">
+          <div class="service-num">01</div>
+          <div class="service-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3 data-ko="AI CS봇" data-en="AI CS Bot">AI CS봇</h3>
+          <p data-ko="24시간 자동 문의 응답. 예약 가능 여부, 가격, 위치 안내를 AI가 즉시 처리합니다. 새벽 2시 문의도 놓치지 않습니다." data-en="24/7 automated responses. Pricing, availability, directions — answered instantly. Never miss a 2AM inquiry.">24시간 자동 문의 응답. 예약 가능 여부, 가격, 위치 안내를 AI가 즉시 처리합니다. 새벽 2시 문의도 놓치지 않습니다.</p>
+          <ul class="service-features">
+            <li data-ko="카카오톡 / 인스타 DM 연동" data-en="KakaoTalk / Instagram DM">카카오톡 / 인스타 DM 연동</li>
+            <li data-ko="자주 묻는 질문 자동 학습" data-en="Auto-learns your FAQs">자주 묻는 질문 자동 학습</li>
+            <li data-ko="불만 고객 즉시 알림" data-en="Urgent complaint alerts">불만 고객 즉시 알림</li>
+          </ul>
+        </div>
 
-  <!-- ── 주문 모달 ── -->
-  <div class="modal-dim" id="odim" onclick="closeOrder()"></div>
-  <div class="modal order-modal" id="order-modal">
-    <button class="modal-close" onclick="closeOrder()">✕</button>
-    <h3 style="margin-bottom:20px">주문 / 결제</h3>
-    <div class="form-group">
-      <label class="form-label">받는 분</label>
-      <input type="text" class="form-input" placeholder="이름">
-      <label class="form-label">연락처</label>
-      <input type="tel" class="form-input" placeholder="010-0000-0000">
-      <label class="form-label">배송 주소</label>
-      <input type="text" class="form-input" placeholder="우편번호">
-      <input type="text" class="form-input" placeholder="기본 주소">
-      <input type="text" class="form-input" placeholder="상세 주소">
-      <label class="form-label">결제 수단</label>
-      <select class="form-input">
-        <option>신용카드</option>
-        <option>실시간 계좌이체</option>
-        <option>카카오페이</option>
-        <option>네이버페이</option>
-      </select>
-    </div>
-    <div class="order-summary" id="order-summary"></div>
-    <button class="btn-order" onclick="alert('결제 연동 준비 중입니다.')">결제하기</button>
-  </div>
+        <div class="service-card">
+          <div class="service-num">02</div>
+          <div class="service-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h3 data-ko="예약 자동화" data-en="Booking Automation">예약 자동화</h3>
+          <p data-ko="실시간 예약 접수, 리마인더 발송, 취소·변경 처리까지 자동으로. 더블부킹은 이제 없습니다." data-en="Real-time booking, reminders, cancellations — all automated. No more double-bookings.">실시간 예약 접수, 리마인더 발송, 취소·변경 처리까지 자동으로. 더블부킹은 이제 없습니다.</p>
+          <ul class="service-features">
+            <li data-ko="24시간 온라인 예약 접수" data-en="24h online booking">24시간 온라인 예약 접수</li>
+            <li data-ko="예약 확인 / 리마인더 자동 발송" data-en="Auto confirmation & reminders">예약 확인 / 리마인더 자동 발송</li>
+            <li data-ko="노쇼 방지 시스템" data-en="No-show prevention">노쇼 방지 시스템</li>
+          </ul>
+        </div>
 
-  <!-- ── 푸터 ── -->
+        <div class="service-card">
+          <div class="service-num">03</div>
+          <div class="service-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <h3 data-ko="경영 인사이트" data-en="Business Intelligence">경영 인사이트</h3>
+          <p data-ko="매출 패턴, 인기 서비스, 단골 고객 분석을 대시보드로 한눈에. 데이터 기반으로 결정하세요." data-en="Revenue patterns, top services, loyal customers — all in one dashboard. Make data-driven decisions.">매출 패턴, 인기 서비스, 단골 고객 분석을 대시보드로 한눈에. 데이터 기반으로 결정하세요.</p>
+          <ul class="service-features">
+            <li data-ko="일/주/월별 매출 리포트" data-en="Daily/weekly/monthly reports">일/주/월별 매출 리포트</li>
+            <li data-ko="고객 재방문율 분석" data-en="Customer retention analysis">고객 재방문율 분석</li>
+            <li data-ko="최적 영업 시간 추천" data-en="Optimal hours recommendation">최적 영업 시간 추천</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="service-num">04</div>
+          <div class="service-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <h3 data-ko="마케팅 자동화" data-en="Marketing Automation">마케팅 자동화</h3>
+          <p data-ko="리뷰 답변 자동 생성, 재방문 쿠폰 발송, SNS 콘텐츠 초안 작성까지. 마케터가 생겼습니다." data-en="Auto-generate review replies, send return coupons, draft SNS content. You just got a marketer.">리뷰 답변 자동 생성, 재방문 쿠폰 발송, SNS 콘텐츠 초안 작성까지. 마케터가 생겼습니다.</p>
+          <ul class="service-features">
+            <li data-ko="네이버 / 구글 리뷰 자동 답변" data-en="Auto reply to Naver/Google reviews">네이버 / 구글 리뷰 자동 답변</li>
+            <li data-ko="단골 고객 재방문 유도 메시지" data-en="Loyalty re-engagement messages">단골 고객 재방문 유도 메시지</li>
+            <li data-ko="SNS 게시글 초안 생성" data-en="SNS content drafts">SNS 게시글 초안 생성</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── INDUSTRIES ── -->
+  <section class="industries" id="industries">
+    <div class="container">
+      <div class="section-label" data-ko="지원 업종" data-en="Supported Industries">지원 업종</div>
+      <h2 class="section-title" data-ko="골목의 모든 사장님께" data-en="For every alley business owner.">골목의 모든 사장님께</h2>
+      <div class="industries-grid">
+
+        <div class="industry-card">
+          <div class="industry-emoji">✂️</div>
+          <h3 data-ko="미용실 · 네일샵" data-en="Hair Salon · Nail Shop">미용실 · 네일샵</h3>
+          <ul>
+            <li data-ko="시술 중 전화 대신 CS봇이 응대" data-en="CS bot answers while you style">시술 중 전화 대신 CS봇이 응대</li>
+            <li data-ko="시술 전 리마인더 자동 발송" data-en="Pre-appointment reminders">시술 전 리마인더 자동 발송</li>
+            <li data-ko="인기 시술·재방문율 분석" data-en="Popular service & retention analysis">인기 시술·재방문율 분석</li>
+          </ul>
+          <div class="industry-tag" data-ko="미용 특화 봇 포함" data-en="Beauty-specialized bot included">미용 특화 봇 포함</div>
+        </div>
+
+        <div class="industry-card">
+          <div class="industry-emoji">📚</div>
+          <h3 data-ko="학원 · 교습소" data-en="Academy · Tutoring">학원 · 교습소</h3>
+          <ul>
+            <li data-ko="수강 문의 24시간 자동 응답" data-en="24h enrollment inquiry response">수강 문의 24시간 자동 응답</li>
+            <li data-ko="수업 일정·휴강 공지 자동 발송" data-en="Class schedule & closure alerts">수업 일정·휴강 공지 자동 발송</li>
+            <li data-ko="수강생 출석·재등록 분석" data-en="Attendance & re-enrollment analysis">수강생 출석·재등록 분석</li>
+          </ul>
+          <div class="industry-tag" data-ko="학원 특화 봇 포함" data-en="Academy-specialized bot included">학원 특화 봇 포함</div>
+        </div>
+
+        <div class="industry-card">
+          <div class="industry-emoji">🏥</div>
+          <h3 data-ko="의원 · 한의원" data-en="Clinic · Oriental Medicine">의원 · 한의원</h3>
+          <ul>
+            <li data-ko="진료 예약·변경 자동 처리" data-en="Automated appointment management">진료 예약·변경 자동 처리</li>
+            <li data-ko="진료 후 케어 메시지 발송" data-en="Post-visit care messages">진료 후 케어 메시지 발송</li>
+            <li data-ko="환자 재내원 유도 자동화" data-en="Patient re-visit automation">환자 재내원 유도 자동화</li>
+          </ul>
+          <div class="industry-tag" data-ko="의료 특화 봇 포함" data-en="Medical-specialized bot included">의료 특화 봇 포함</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW IT WORKS ── -->
+  <section class="how" id="how">
+    <div class="container">
+      <div class="section-label" data-ko="도입 방법" data-en="How It Works">도입 방법</div>
+      <h2 class="section-title" data-ko="3분이면 충분합니다." data-en="3 minutes is all it takes.">3분이면 충분합니다.</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <h3 data-ko="무료 상담 신청" data-en="Request Free Consult">무료 상담 신청</h3>
+            <p data-ko="업종과 운영 방식을 알려주세요. 맞춤 설정을 함께 잡아드립니다." data-en="Tell us your industry and operations. We'll tailor everything for you.">업종과 운영 방식을 알려주세요. 맞춤 설정을 함께 잡아드립니다.</p>
+          </div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <h3 data-ko="AI 봇 세팅" data-en="AI Bot Setup">AI 봇 세팅</h3>
+            <p data-ko="카카오톡·인스타 연결, FAQ 입력, 예약 시스템 연동을 저희가 해드립니다." data-en="We connect KakaoTalk, Instagram, input your FAQs, and integrate booking.">카카오톡·인스타 연결, FAQ 입력, 예약 시스템 연동을 저희가 해드립니다.</p>
+          </div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <h3 data-ko="운영 시작" data-en="Go Live">운영 시작</h3>
+            <p data-ko="이제 팔란티어가 일합니다. 사장님은 본업에 집중하세요." data-en="Palantir takes over. You focus on what you do best.">이제 팔란티어가 일합니다. 사장님은 본업에 집중하세요.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="cta" id="contact">
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-badge" data-ko="지금 무료로 시작" data-en="Start for free today">지금 무료로 시작</div>
+        <h2 data-ko="사장님 혼자 다 하지 않아도 됩니다." data-en="You don't have to do it all alone.">사장님 혼자 다 하지 않아도 됩니다.</h2>
+        <p data-ko="첫 30일은 완전 무료입니다. 설치비도, 위약금도 없습니다." data-en="First 30 days completely free. No setup fee. No cancellation penalty.">첫 30일은 완전 무료입니다. 설치비도, 위약금도 없습니다.</p>
+        <form class="contact-form" id="contactForm">
+          <div class="form-row">
+            <input type="text" class="form-input" id="formName" placeholder="" required>
+            <label class="form-label" data-ko="사장님 성함" data-en="Your Name">사장님 성함</label>
+          </div>
+          <div class="form-row">
+            <input type="tel" class="form-input" id="formPhone" placeholder="" required>
+            <label class="form-label" data-ko="연락처" data-en="Phone Number">연락처</label>
+          </div>
+          <div class="form-row">
+            <select class="form-input form-select" id="formIndustry" required>
+              <option value="" disabled selected></option>
+              <option value="beauty" data-ko="미용실 / 네일샵" data-en="Hair Salon / Nail Shop">미용실 / 네일샵</option>
+              <option value="academy" data-ko="학원 / 교습소" data-en="Academy / Tutoring">학원 / 교습소</option>
+              <option value="clinic" data-ko="의원 / 한의원" data-en="Clinic / Oriental Medicine">의원 / 한의원</option>
+              <option value="other" data-ko="기타" data-en="Other">기타</option>
+            </select>
+            <label class="form-label" data-ko="업종 선택" data-en="Select Industry">업종 선택</label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full" data-ko="무료 상담 신청하기" data-en="Request Free Consultation">무료 상담 신청하기</button>
+        </form>
+        <p class="cta-note" data-ko="영업일 기준 24시간 이내 연락드립니다." data-en="We'll reach out within 24 business hours.">영업일 기준 24시간 이내 연락드립니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
   <footer class="footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <div class="footer-logo">◈ SHURONGMINT</div>
-        <p>해외 직구 귀금속 전문몰</p>
-      </div>
-      <div class="footer-info">
-        <p><strong>상호</strong> 슈롱민트 &nbsp;|&nbsp; <strong>대표</strong> 홍길동</p>
-        <p><strong>사업자등록번호</strong> 000-00-00000 &nbsp;|&nbsp; <strong>통신판매업</strong> 제2025-서울강남-00000호</p>
-        <p><strong>주소</strong> 서울특별시 강남구 테헤란로 000</p>
-        <p><strong>고객센터</strong> 010-0000-0000 &nbsp;|&nbsp; <strong>이메일</strong> help@shurongmint.kr</p>
-        <p class="footer-notice">※ 귀금속 가격은 국제 시세 및 환율에 따라 실시간 변동됩니다.</p>
-      </div>
-      <div class="footer-links">
-        <a href="#">이용약관</a>
-        <a href="#">개인정보처리방침</a>
-        <a href="#">배송·교환·반품 안내</a>
-        <a href="#">공지사항</a>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="logo-icon">◈</span>
+          <span data-ko="골목길 팔란티어" data-en="Alley Palantir">골목길 팔란티어</span>
+        </div>
+        <p class="footer-copy" data-ko="© 2025 골목길 팔란티어. 골목 경제를 지킵니다." data-en="© 2025 Alley Palantir. We protect the alley economy.">© 2025 골목길 팔란티어. 골목 경제를 지킵니다.</p>
       </div>
     </div>
-    <div class="footer-copy">© 2025 SHURONGMINT. All rights reserved.</div>
   </footer>
 
-  <script src="main.js"></script>
+  <script src="palantir.js"></script>
 </body>
 </html>
