@@ -187,6 +187,104 @@
     </div>
   </section>
 
+  <!-- ── DASHBOARD DEMO ── -->
+  <section class="dash-section" id="dashboard">
+    <div class="container">
+      <div class="section-label" data-ko="인사이트 데모" data-en="Insight Demo">인사이트 데모</div>
+      <h2 class="section-title" data-ko="데이터가 결정을 대신합니다." data-en="Let data guide your decisions.">데이터가 결정을 대신합니다.</h2>
+      <p class="section-desc" data-ko="실제 팔란티어 대시보드 미리보기. 탭을 눌러 기간을 바꿔보세요." data-en="Preview of the real dashboard. Switch tabs to explore.">실제 팔란티어 대시보드 미리보기. 탭을 눌러 기간을 바꿔보세요.</p>
+
+      <div class="dash-window">
+        <div class="dash-titlebar">
+          <div class="dash-dots">
+            <span class="t-dot red"></span>
+            <span class="t-dot yellow"></span>
+            <span class="t-dot green"></span>
+          </div>
+          <span class="dash-titlebar-label" data-ko="palantir — 경영 인사이트" data-en="palantir — Business Intelligence">palantir — 경영 인사이트</span>
+          <div class="dash-live"><span class="badge-dot"></span><span data-ko="실시간" data-en="Live">실시간</span></div>
+        </div>
+
+        <div class="dash-body">
+          <!-- 기간 탭 -->
+          <div class="dash-tabs">
+            <button class="dash-tab active" data-period="daily" data-ko="일별" data-en="Daily">일별</button>
+            <button class="dash-tab" data-period="weekly" data-ko="주별" data-en="Weekly">주별</button>
+            <button class="dash-tab" data-period="monthly" data-ko="월별" data-en="Monthly">월별</button>
+          </div>
+
+          <div class="dash-grid">
+
+            <!-- 매출 리포트 -->
+            <div class="dash-card dash-sales">
+              <div class="dash-kpi-row">
+                <div>
+                  <div class="dash-card-label" data-ko="총 매출" data-en="Total Sales">총 매출</div>
+                  <div class="dash-kpi-val" id="dashTotal">₩2,373,000</div>
+                </div>
+                <div class="dash-growth" id="dashGrowth">
+                  <span class="dash-growth-arrow">↑</span>
+                  <span id="dashGrowthPct">12.4</span>%
+                  <span id="dashGrowthPeriod" data-ko="전주 대비" data-en="vs last week">전주 대비</span>
+                </div>
+              </div>
+              <div class="dash-chart">
+                <div class="dash-bars" id="dashBars"></div>
+                <div class="dash-xlabels" id="dashXLabels"></div>
+              </div>
+            </div>
+
+            <!-- 고객 재방문율 -->
+            <div class="dash-card dash-return">
+              <div class="dash-card-label" data-ko="고객 재방문율" data-en="Return Rate">고객 재방문율</div>
+              <div class="dash-ring-wrap">
+                <svg viewBox="0 0 100 100" class="dash-ring">
+                  <circle class="dash-ring-track" cx="50" cy="50" r="38"/>
+                  <circle class="dash-ring-fill" id="dashRingFill" cx="50" cy="50" r="38"
+                    stroke-dasharray="238.76" stroke-dashoffset="76.4"
+                    transform="rotate(-90 50 50)"/>
+                </svg>
+                <div class="dash-ring-center">
+                  <span class="dash-ring-pct">68<small>%</small></span>
+                  <span data-ko="재방문" data-en="return">재방문</span>
+                </div>
+              </div>
+              <div class="dash-rstat">
+                <div class="dash-rstat-item">
+                  <div class="dash-rstat-key" data-ko="단골" data-en="Loyal">단골</div>
+                  <div class="dash-rstat-val">142<span data-ko="명" data-en="">명</span></div>
+                </div>
+                <div class="dash-rstat-divider"></div>
+                <div class="dash-rstat-item">
+                  <div class="dash-rstat-key" data-ko="신규" data-en="New">신규</div>
+                  <div class="dash-rstat-val">67<span data-ko="명" data-en="">명</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 인기 서비스 -->
+            <div class="dash-card dash-services">
+              <div class="dash-card-label" data-ko="인기 서비스 TOP 4" data-en="Top 4 Services">인기 서비스 TOP 4</div>
+              <div id="dashServices"></div>
+            </div>
+
+            <!-- 최적 영업 시간 -->
+            <div class="dash-card dash-hours">
+              <div class="dash-card-label" data-ko="최적 영업 시간" data-en="Peak Hours">최적 영업 시간</div>
+              <div class="dash-hmap-days" id="dashHmapDays"></div>
+              <div class="dash-hmap" id="dashHmap"></div>
+              <div class="dash-peak">
+                <span class="dash-peak-tag" data-ko="최고 매출" data-en="Peak">최고 매출</span>
+                <span class="dash-peak-time" data-ko="토요일 14–16시" data-en="Sat 2–4 PM">토요일 14–16시</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ── INDUSTRIES ── -->
   <section class="industries" id="industries">
     <div class="container">
@@ -310,6 +408,52 @@
     </div>
   </footer>
 
+  <!-- ── AI CS봇 채팅 위젯 ── -->
+  <div class="chat-launcher" id="chatLauncher" title="AI 상담 시작">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span class="chat-launcher-label" data-ko="AI 상담" data-en="AI Chat">AI 상담</span>
+    <span class="chat-unread" id="chatUnread">1</span>
+  </div>
+
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div class="chat-avatar">◈</div>
+        <div>
+          <div class="chat-title" data-ko="팔란티어 CS봇" data-en="Palantir CS Bot">팔란티어 CS봇</div>
+          <div class="chat-online"><span class="online-dot"></span><span data-ko="온라인" data-en="Online">온라인</span></div>
+        </div>
+      </div>
+      <button class="chat-close" id="chatClose">✕</button>
+    </div>
+
+    <!-- 로그인 전 -->
+    <div class="chat-login-pane" id="chatLoginPane">
+      <div class="chat-login-msg">
+        <div class="chat-bot-bubble" data-ko="안녕하세요! 👋<br>카카오로 로그인하고<br>AI 상담을 시작해보세요." data-en="Hello! 👋<br>Login with Kakao<br>to start AI consultation.">안녕하세요! 👋<br>카카오로 로그인하고<br>AI 상담을 시작해보세요.</div>
+      </div>
+      <button class="btn-kakao" id="kakaoLoginBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.477 3 2 6.477 2 10.5c0 2.584 1.522 4.868 3.84 6.29l-.98 3.63 4.2-2.77c.94.14 1.92.13 2.94.13 5.523 0 10-3.477 10-7.753S17.523 3 12 3z"/></svg>
+        <span data-ko="카카오로 시작하기" data-en="Continue with Kakao">카카오로 시작하기</span>
+      </button>
+    </div>
+
+    <!-- 로그인 후 채팅 -->
+    <div class="chat-body" id="chatBody">
+      <div class="chat-messages" id="chatMessages"></div>
+      <div class="chat-typing" id="chatTyping">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" class="chat-input" placeholder="메시지를 입력하세요..." autocomplete="off">
+        <button class="chat-send" id="chatSend">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" crossorigin="anonymous"></script>
   <script src="palantir.js"></script>
 </body>
 </html>
