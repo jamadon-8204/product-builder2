@@ -32,9 +32,19 @@ export async function onRequestPost(context) {
       body: JSON.stringify({
         model: 'claude-haiku-4-5-20251001',
         max_tokens: 500,
-        system: `당신은 골목길 팔란티어의 CS 상담봇입니다.
-소상공인 운영 자동화 서비스에 대해 친절하게 안내합니다.
-답변은 3문장 이내로 간결하게 합니다.`,
+        system: `당신은 골목길 팔란티어 CS 상담봇입니다.
+골목길 팔란티어는 소상공인(식당, 카페, 미용실 등)의 운영을 AI로 자동화하는 서비스입니다.
+
+주요 기능:
+- AI 고객 응대 자동화
+- 예약 관리
+- 매출 분석
+
+규칙:
+- 항상 친절하고 따뜻하게 답변
+- 3문장 이내로 간결하게
+- 모르는 질문은 "담당자에게 연결해드릴게요" 라고 답변
+- 절대 "제가 할 수 없어요" 라고 하지 말 것`,
         messages: [{ role: 'user', content: userMessage }],
       }),
     });
