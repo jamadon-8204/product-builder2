@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>온라인 예약 | 골목길 팔란티어</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="booking.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="bk-nav">
+    <a href="index.html" class="bk-logo">
+      <span class="bk-logo-icon">◈</span>
+      <span class="bk-logo-text">골목길 팔란티어</span>
+    </a>
+    <span class="bk-nav-title">온라인 예약</span>
+  </nav>
+
+  <!-- PROGRESS -->
+  <div class="bk-progress-bar">
+    <div class="bk-progress-fill" id="progressFill"></div>
+  </div>
+
+  <main class="bk-main">
+
+    <!-- ── STEP 1: 서비스 선택 ── -->
+    <section class="bk-step" id="step1">
+      <div class="bk-step-header">
+        <div class="bk-step-num">01</div>
+        <div>
+          <h2 class="bk-step-title">서비스 선택</h2>
+          <p class="bk-step-desc">원하시는 서비스를 선택해주세요.</p>
+        </div>
+      </div>
+
+      <div class="bk-service-tabs">
+        <button class="bk-tab active" data-type="beauty">✂️ 미용실</button>
+        <button class="bk-tab" data-type="clinic">🏥 의원</button>
+        <button class="bk-tab" data-type="academy">📚 학원</button>
+      </div>
+
+      <div class="bk-service-grid" id="serviceGrid">
+        <!-- JS로 동적 렌더링 -->
+      </div>
+    </section>
+
+    <!-- ── STEP 2: 날짜·시간 선택 ── -->
+    <section class="bk-step hidden" id="step2">
+      <div class="bk-step-header">
+        <div class="bk-step-num">02</div>
+        <div>
+          <h2 class="bk-step-title">날짜 · 시간 선택</h2>
+          <p class="bk-step-desc">원하시는 날짜와 시간을 선택해주세요.</p>
+        </div>
+      </div>
+
+      <div class="bk-datetime-grid">
+        <!-- 달력 -->
+        <div class="bk-calendar-wrap">
+          <div class="bk-cal-header">
+            <button class="bk-cal-nav" id="calPrev">&#8592;</button>
+            <span class="bk-cal-month" id="calMonth"></span>
+            <button class="bk-cal-nav" id="calNext">&#8594;</button>
+          </div>
+          <div class="bk-cal-weekdays">
+            <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+          </div>
+          <div class="bk-cal-days" id="calDays"></div>
+        </div>
+
+        <!-- 시간 슬롯 -->
+        <div class="bk-slots-wrap">
+          <div class="bk-slots-header">
+            <span id="selectedDateLabel">날짜를 먼저 선택하세요</span>
+            <div class="bk-slots-legend">
+              <span class="legend-dot available"></span><span>가능</span>
+              <span class="legend-dot booked"></span><span>마감</span>
+            </div>
+          </div>
+          <div class="bk-slots-grid" id="slotsGrid">
+            <div class="bk-slots-placeholder">
+              <span>📅</span>
+              <p>날짜를 선택하면 예약 가능한 시간이 표시됩니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── STEP 3: 고객 정보 ── -->
+    <section class="bk-step hidden" id="step3">
+      <div class="bk-step-header">
+        <div class="bk-step-num">03</div>
+        <div>
+          <h2 class="bk-step-title">고객 정보</h2>
+          <p class="bk-step-desc">연락처를 남겨주시면 예약 확인 메시지를 보내드립니다.</p>
+        </div>
+      </div>
+
+      <div class="bk-summary-mini" id="step3Summary"></div>
+
+      <form class="bk-form" id="customerForm" novalidate>
+        <div class="bk-field">
+          <label class="bk-label" for="fieldName">성함 <span class="required">*</span></label>
+          <input class="bk-input" id="fieldName" type="text" placeholder="홍길동" autocomplete="name" required>
+        </div>
+        <div class="bk-field">
+          <label class="bk-label" for="fieldPhone">휴대폰 번호 <span class="required">*</span></label>
+          <input class="bk-input" id="fieldPhone" type="tel" placeholder="010-0000-0000" autocomplete="tel" required>
+        </div>
+        <div class="bk-field">
+          <label class="bk-label" for="fieldEmail">이메일 <span class="optional">(리마인더 수신)</span></label>
+          <input class="bk-input" id="fieldEmail" type="email" placeholder="example@email.com" autocomplete="email">
+        </div>
+        <div class="bk-field">
+          <label class="bk-label" for="fieldNotes">메모 <span class="optional">(선택)</span></label>
+          <textarea class="bk-input bk-textarea" id="fieldNotes" placeholder="특이사항이나 요청사항을 적어주세요." rows="3"></textarea>
+        </div>
+
+        <div class="bk-noshow-notice">
+          <span class="notice-icon">⚠️</span>
+          <p>노쇼(무단 불참) 발생 시 향후 예약이 제한될 수 있습니다. 불참 예정이시면 예약 시간 2시간 전까지 취소해주세요.</p>
+        </div>
+      </form>
+    </section>
+
+    <!-- ── STEP 4: 최종 확인 ── -->
+    <section class="bk-step hidden" id="step4">
+      <div class="bk-step-header">
+        <div class="bk-step-num">04</div>
+        <div>
+          <h2 class="bk-step-title">예약 확인</h2>
+          <p class="bk-step-desc">아래 내용을 확인하고 예약을 완료해주세요.</p>
+        </div>
+      </div>
+
+      <div class="bk-confirm-card" id="confirmCard">
+        <!-- JS로 채움 -->
+      </div>
+
+      <div class="bk-terms">
+        <label class="bk-checkbox">
+          <input type="checkbox" id="termsCheck">
+          <span class="bk-checkmark"></span>
+          <span>예약 정책에 동의합니다. (노쇼 시 재예약 제한)</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- ── SUCCESS ── -->
+    <section class="bk-step hidden" id="stepSuccess">
+      <div class="bk-success">
+        <div class="bk-success-icon">✓</div>
+        <h2 class="bk-success-title">예약이 완료되었습니다!</h2>
+        <p class="bk-success-sub" id="successSub"></p>
+
+        <div class="bk-success-card" id="successCard"></div>
+
+        <div class="bk-success-actions">
+          <button class="bk-btn-ghost" id="addCalendarBtn">📅 캘린더에 추가</button>
+          <a href="index.html" class="bk-btn-ghost">홈으로 돌아가기</a>
+        </div>
+
+        <div class="bk-cancel-info">
+          <p>예약 취소는 이메일의 취소 링크를 이용하거나, 예약 번호를 알려주시면 처리해드립니다.</p>
+          <p class="bk-cancel-id" id="cancelId"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── NAVIGATION BUTTONS ── -->
+    <div class="bk-nav-buttons" id="navButtons">
+      <button class="bk-btn-back hidden" id="btnBack">← 이전</button>
+      <button class="bk-btn-next" id="btnNext" disabled>다음 →</button>
+    </div>
+
+  </main>
+
+  <!-- LOADING OVERLAY -->
+  <div class="bk-loading" id="loadingOverlay">
+    <div class="bk-spinner"></div>
+    <p id="loadingText">처리 중...</p>
+  </div>
+
+  <script src="booking.js"></script>
+</body>
+</html>
